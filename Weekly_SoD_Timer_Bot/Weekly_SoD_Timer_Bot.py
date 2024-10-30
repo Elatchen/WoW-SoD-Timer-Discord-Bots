@@ -59,7 +59,7 @@ def calculate_weekly_timer() :
         resetHour = resetHour + 1
     
     weekday = now.weekday()   #Mon 0, Tue 1, Wed 2, Thu 3, Fri 4, Sat 5, Sun 6  
-    current_hour = now.strftime("%H")  ## e.g. 14:24 = 14
+    current_hour = int(now.strftime("%H"))  ## e.g. 14:24 = 14
     
     #Wednesday timer 
     next_wednesday = next_weekday(now, 2) # 0 = Monday, 1=Tuesday, 2=Wednesday...
