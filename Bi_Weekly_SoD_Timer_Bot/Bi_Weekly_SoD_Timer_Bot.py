@@ -57,9 +57,9 @@ def calculate_biweekly_timer() :
         resetHour = resetHour + 1
     
     weekday = now.weekday()   #Mon 0, Tue 1, Wed 2, Thu 3, Fri 4, Sat 5, Sun 6  
-    current_hour = now.strftime("%H")  ## e.g. 14:24 = 14
+    current_hour = int(now.strftime("%H"))  ## e.g. 14:24 = 14
     
-    timeIntoTheWeek = (weekday*100)+ int(current_hour)
+    timeIntoTheWeek = (weekday*100) + current_hour
     #print("Used for determination of which of the two resets to count down to: " + str(timeIntoTheWeek))
     
     #Wednesday timer
