@@ -116,7 +116,7 @@ async def on_ready():
     await client.wait_until_ready()
     print(f'{client.user} has connected to Discord! UwU')
 	
-	# starts update timer function if not already running
+    # starts update timer function if not already running
     if not update_timer.is_running() :
         update_timer.start()
 	
