@@ -106,8 +106,11 @@ async def on_ready():
     # Waiting until the bot is ready
     await client.wait_until_ready()
     print(f'{client.user} has connected to Discord! UwU')
-    # starts update timer function
-    update_timer.start()
+    	
+	# starts update timer function if not already running
+    if not update_timer.is_running() :
+        update_timer.start()
+	
     await asyncio.sleep(10)
     status = discord.CustomActivity(name=STATUS)
     await client.change_presence(status=discord.Status.online, activity=status)
