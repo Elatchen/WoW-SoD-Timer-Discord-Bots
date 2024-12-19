@@ -97,20 +97,23 @@ def calculate_weekly_timer() :
 @tasks.loop(seconds=45)
 async def update_timer():
     days, hours, minutes = calculate_weekly_timer()
-    
-    for guild in client.guilds:
-        await guild.me.edit(nick="!Weekly: " + days + hours + minutes)        
+    try :
+	    for guild in client.guilds:
+		    await guild.me.edit(nick="!Weekly: " + days + hours + minutes) 
+    except :
+	    print('Exception occured!')
+	    return
 
 @client.event
 async def on_ready():
     # Waiting until the bot is ready
     await client.wait_until_ready()
     print(f'{client.user} has connected to Discord! UwU')
-    	
+	
 	# starts update timer function if not already running
     if not update_timer.is_running() :
         update_timer.start()
-	
+		
     await asyncio.sleep(10)
     status = discord.CustomActivity(name=STATUS)
     await client.change_presence(status=discord.Status.online, activity=status)
