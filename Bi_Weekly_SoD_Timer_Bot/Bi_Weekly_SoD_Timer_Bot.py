@@ -59,7 +59,7 @@ def calculate_biweekly_timer() :
     weekday = now.weekday()   #Mon 0, Tue 1, Wed 2, Thu 3, Fri 4, Sat 5, Sun 6  
     current_hour = int(now.strftime("%H"))  ## e.g. 14:24 = 14
     
-    timeIntoTheWeek = (weekday*100) + current_hour
+    timeIntoTheWeek = (weekday*100)+ current_hour
     #print("Used for determination of which of the two resets to count down to: " + str(timeIntoTheWeek))
     
     #Wednesday timer
@@ -106,9 +106,12 @@ def calculate_biweekly_timer() :
 @tasks.loop(seconds=45)
 async def update_timer():
     days, hours, minutes = calculate_biweekly_timer()       
-    
-    for guild in client.guilds:
-        await guild.me.edit(nick="!BiWeekly: " + days + hours + minutes)        
+    try :    
+        for guild in client.guilds:
+            await guild.me.edit(nick="!BiWeekly: " + days + hours + minutes)
+    except :
+        print('Exception occured!')
+        return		
 
 @client.event
 async def on_ready():
@@ -116,10 +119,10 @@ async def on_ready():
     await client.wait_until_ready()
     print(f'{client.user} has connected to Discord! UwU')
 	
-    # starts update timer function if not already running
+	# starts update timer function if not already running
     if not update_timer.is_running() :
         update_timer.start()
-	
+		
     await asyncio.sleep(10)
     status = discord.CustomActivity(name=STATUS)
     await client.change_presence(status=discord.Status.online, activity=status)
