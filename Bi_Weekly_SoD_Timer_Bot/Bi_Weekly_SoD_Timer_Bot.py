@@ -103,7 +103,7 @@ def calculate_biweekly_timer() :
         
     return days, hours, minutes
 
-@tasks.loop(seconds=45)
+@tasks.loop(seconds=300)
 async def update_timer():
     days, hours, minutes = calculate_biweekly_timer()       
     try :    
